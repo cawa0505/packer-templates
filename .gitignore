@@ -1,5 +1,9 @@
 *.box
+*.iso
+*.bz2
 .bundle/
 .vagrant/
 output-*/
 packer_cache/
+boxes/*
+!empty

@@ -1,0 +1,78 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "gentoo-nofb",
+        "<enter>",
+        "<wait10>",
+        "<enter>",
+        "<wait10>",
+        "<wait10>",
+        "<wait10>",
+        "<wait10>",
+        "<wait10>",
+        "passwd {{user `username`}}",
+        "<enter>",
+        "<wait>",
+        "{{user `password`}}",
+        "<enter>",
+        "<wait>",
+        "{{user `password`}}",
+        "<enter>",
+        "<wait>",
+        "/etc/init.d/sshd start",
+        "<enter>",
+        "<wait>"
+      ],
+      "boot_wait": "5s",
+      "disk_size": 60000,
+      "guest_additions_mode": "disable",
+      "guest_os_type": "Gentoo_64",
+      "headless": false,
+      "output_directory": "output-gentoo-amd64",
+      "iso_checksum": "eb443876587de79bb29355afab8915ff592217df31ea16853e150aff66bc8b8d5e1d1e21d2265bd1773593ea7b414b5062ccf06bbe0f929f498808b79fa9d4b6",
+      "iso_checksum_type": "sha512",
+      "iso_url": "./http/gentoo/install-amd64-minimal-{{user `stage3`}}.iso",
+      "shutdown_command": "shutdown -hP now",
+      "ssh_password": "{{user `password`}}",
+      "ssh_username": "{{user `username`}}",
+      "ssh_wait_timeout": "20s",
+      "type": "virtualbox-iso",
+      "http_directory": "http",
+      "vm_name": "packer-gentoo-amd64"
+    }
+  ],
+  "description": "Faithful Stage 3 Gentoo Installation (VirtualBox)",
+  "post-processors": [
+    {
+      "compression_level": "{{user `compression_level`}}",
+      "output": "boxes/gentoo-amd64-stage3-virtualbox.box",
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [
+    {
+      "destination": "/tmp",
+      "source": "scripts/gentoo/scripts",
+      "type": "file"
+    },
+    {
+      "environment_vars": [
+        "STAGE3={{user `stage3`}}",
+        "VM_TYPE=virtualbox",
+        "SCRIPTS=/tmp"
+      ],
+      "scripts": [
+        "scripts/gentoo/provision.sh"
+      ],
+      "type": "shell"
+    }
+  ],
+  "variables": {
+    "username": "root",
+    "password": "vagrant",
+    "compression_level": 6,
+    "stage3": "20150507"
+  }
+}
+

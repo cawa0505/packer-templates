@@ -2,17 +2,18 @@
   "builders": [{
     "type": "virtualbox-iso",
     "guest_os_type": "ArchLinux_64",
-    "iso_url": "{{user `mirror`}}/iso/2015.03.01/archlinux-2015.03.01-dual.iso",
-    "iso_checksum": "3bfe96921809afe9b20938f2941c5ccf5cc97fe8",
+    "iso_url": "{{user `mirror`}}/iso/latest/archlinux-2015.05.01-dual.iso",
+    "iso_checksum": "84387d095141ac2a4fd8c83ca0908ffa543a1d3b",
     "iso_checksum_type": "sha1",
     "output_directory": "output-archlinux-x86_64",
     "vm_name": "packer-archlinux-x86_64",
     "disk_size": "{{user `disk_size`}}",
     "headless": "{{user `headless`}}",
     "http_directory": "http",
-    "boot_wait": "5s",
+    "boot_wait": "10s",
     "boot_command": [
       "<enter><wait10><wait10>",
+      "<wait10><wait10><wait10><wait10>",
       "curl -O 'http://{{.HTTPIP}}:{{.HTTPPort}}/archlinux/install{,-chroot}.sh'<enter><wait>",
       "cat install-chroot.sh | bash install.sh && systemctl reboot<enter>"
     ],
@@ -39,7 +40,7 @@
   "post-processors": [{
     "type": "vagrant",
     "compression_level": "{{user `compression_level`}}",
-    "output": "archlinux-x86_64.box"
+    "output": "boxes/archlinux-x86_64.box"
   }],
   "variables": {
     "compression_level": 6,
@@ -47,6 +48,6 @@
     "disk_size": 40000,
     "headless": false,
     "memory": "512",
-    "mirror": "http://mirrors.kernel.org/archlinux"
+    "mirror": "http://ftp.tku.edu.tw/Linux/ArchLinux"
   }
 }
