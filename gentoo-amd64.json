@@ -25,10 +25,10 @@
         "<wait>"
       ],
       "boot_wait": "5s",
-      "disk_size": {{user `disk_size`}},
+      "disk_size": "{{user `disk_size`}}",
       "guest_additions_mode": "disable",
       "guest_os_type": "Gentoo_64",
-      "headless": {{user `headless`}},
+      "headless": "{{user `headless`}}",
       "output_directory": "output-gentoo-amd64",
       "iso_checksum": "eb443876587de79bb29355afab8915ff592217df31ea16853e150aff66bc8b8d5e1d1e21d2265bd1773593ea7b414b5062ccf06bbe0f929f498808b79fa9d4b6",
       "iso_checksum_type": "sha512",
