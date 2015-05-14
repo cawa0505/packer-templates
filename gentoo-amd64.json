@@ -25,21 +25,25 @@
         "<wait>"
       ],
       "boot_wait": "5s",
-      "disk_size": 60000,
+      "disk_size": {{user `disk_size`}},
       "guest_additions_mode": "disable",
       "guest_os_type": "Gentoo_64",
-      "headless": false,
+      "headless": {{user `headless`}},
       "output_directory": "output-gentoo-amd64",
       "iso_checksum": "eb443876587de79bb29355afab8915ff592217df31ea16853e150aff66bc8b8d5e1d1e21d2265bd1773593ea7b414b5062ccf06bbe0f929f498808b79fa9d4b6",
       "iso_checksum_type": "sha512",
-      "iso_url": "./http/gentoo/install-amd64-minimal-{{user `stage3`}}.iso",
+      "iso_url": "{{user `mirror`}}/releases/amd64/autobuilds/{{user `stage3`}}/install-amd64-minimal-{{user `stage3`}}.iso",
       "shutdown_command": "shutdown -hP now",
       "ssh_password": "{{user `password`}}",
       "ssh_username": "{{user `username`}}",
       "ssh_wait_timeout": "20s",
       "type": "virtualbox-iso",
       "http_directory": "http",
-      "vm_name": "packer-gentoo-amd64"
+      "vm_name": "packer-gentoo-amd64",
+      "vboxmanage": [
+      	["modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}"],
+      	["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"]
+      ]
     }
   ],
   "description": "Faithful Stage 3 Gentoo Installation (VirtualBox)",
@@ -58,6 +62,7 @@
     },
     {
       "environment_vars": [
+        "MIRROR={{user `mirror`}}",
         "STAGE3={{user `stage3`}}",
         "VM_TYPE=virtualbox",
         "SCRIPTS=/tmp"
@@ -72,6 +77,11 @@
     "username": "root",
     "password": "vagrant",
     "compression_level": 6,
+    "cpus": "1",
+    "disk_size": 40000,
+    "headless": false,
+    "memory": "1024",
+    "mirror": "http://ftp.twaren.net/Linux/Gentoo"
     "stage3": "20150507"
   }
 }
