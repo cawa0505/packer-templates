@@ -81,7 +81,7 @@
     "disk_size": 40000,
     "headless": false,
     "memory": "1024",
-    "mirror": "http://ftp.twaren.net/Linux/Gentoo"
+    "mirror": "http://ftp.twaren.net/Linux/Gentoo",
     "stage3": "20150507"
   }
 }
