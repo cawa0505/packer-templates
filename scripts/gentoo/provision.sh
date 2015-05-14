@@ -21,9 +21,11 @@ for script in \
   portage     \
   timezone    \
   fstab       \
-  kernel      \
+  kerneldocker\
   grub        \
   $VM_TYPE    \
+  add_vim     \
+  docker      \
   network     \
   vagrant     \
   cleanup
