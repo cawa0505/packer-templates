@@ -25,9 +25,9 @@ for script in \
   grub        \
   $VM_TYPE    \
   add_vim     \
-  docker      \
   network     \
   vagrant     \
+  docker      \
   cleanup
 do
   "$SCRIPTS/scripts/$script.sh"
