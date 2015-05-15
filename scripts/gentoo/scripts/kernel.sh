@@ -8,5 +8,4 @@ emerge sys-kernel/genkernel
 cd /usr/src/linux
 mv /tmp/kernel.config .config
 genkernel --install --symlink --oldconfig all
-emerge -c sys-kernel/genkernel
 EOF

@@ -13,21 +13,22 @@ fi
 
 chmod +x $SCRIPTS/scripts/*.sh
 
-for script in \
-  partition   \
-  stage3      \
-  mounts      \
-  resolv.conf \
-  portage     \
-  timezone    \
-  fstab       \
-  kerneldocker\
-  grub        \
-  $VM_TYPE    \
-  add_vim     \
-  network     \
-  vagrant     \
-  docker      \
+for script in  \
+  partition    \
+  stage3       \
+  mounts       \
+  resolv.conf  \
+  portage      \
+  timezone     \
+  fstab        \
+  kerneldocker \
+  grub         \
+  $VM_TYPE     \
+  add_vim      \
+  add_eix      \
+  network      \
+  vagrant      \
+  docker       \
   cleanup
 do
   "$SCRIPTS/scripts/$script.sh"
