@@ -2,6 +2,7 @@
 *.log
 *.iso
 *.bz2
+*.swp
 .bundle/
 .vagrant/
 output-*/
