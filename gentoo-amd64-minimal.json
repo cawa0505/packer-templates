@@ -1,0 +1,98 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "gentoo-nofb",
+        "<enter>",
+        "<wait10>",
+        "<enter>",
+        "<wait10>",
+        "<wait10>",
+        "<wait10>",
+        "<wait10>",
+        "<wait10>",
+        "passwd {{user `username`}}",
+        "<enter>",
+        "<wait>",
+        "{{user `password`}}",
+        "<enter>",
+        "<wait>",
+        "{{user `password`}}",
+        "<enter>",
+        "<wait>",
+        "/etc/init.d/sshd start",
+        "<enter>",
+        "<wait>"
+      ],
+      "boot_wait": "5s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_additions_mode": "disable",
+      "guest_os_type": "Gentoo_64",
+      "headless": "{{user `headless`}}",
+      "http_directory": "http",
+      "iso_checksum": "eb443876587de79bb29355afab8915ff592217df31ea16853e150aff66bc8b8d5e1d1e21d2265bd1773593ea7b414b5062ccf06bbe0f929f498808b79fa9d4b6",
+      "iso_checksum_type": "sha512",
+      "iso_url": "{{user `mirror`}}/releases/amd64/autobuilds/{{user `stage3`}}/install-amd64-minimal-{{user `stage3`}}.iso",
+      "output_directory": "output-gentoo-amd64-minimal",
+      "shutdown_command": "shutdown -hP now",
+      "ssh_password": "{{user `password`}}",
+      "ssh_username": "{{user `username`}}",
+      "ssh_wait_timeout": "20s",
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "{{user `memory`}}"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "{{user `cpus`}}"
+        ]
+      ],
+      "vm_name": "packer-gentoo-amd64-minimal"
+    }
+  ],
+  "description": "Stage 3 Gentoo Installation Minimal (VirtualBox)",
+  "post-processors": [
+    {
+      "compression_level": "{{user `compression_level`}}",
+      "output": "boxes/gentoo-amd64-stage3-minimal-virtualbox.box",
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [
+    {
+      "destination": "/tmp",
+      "source": "scripts/gentoo/scripts",
+      "type": "file"
+    },
+    {
+      "environment_vars": [
+        "MIRROR={{user `mirror`}}",
+        "STAGE3={{user `stage3`}}",
+        "VM_TYPE=virtualbox",
+        "SCRIPTS=/tmp"
+      ],
+      "scripts": [
+        "scripts/gentoo/provision-minimal.sh"
+      ],
+      "type": "shell"
+    }
+  ],
+  "variables": {
+    "compression_level": 6,
+    "cpus": "1",
+    "disk_size": 40000,
+    "headless": false,
+    "memory": "1024",
+    "mirror": "http://ftp.tku.edu.tw/Linux/Gentoo",
+    "password": "vagrant",
+    "stage3": "20150507",
+    "username": "root"
+  }
+}
+
