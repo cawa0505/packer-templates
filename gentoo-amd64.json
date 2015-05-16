@@ -30,7 +30,7 @@
       "guest_os_type": "Gentoo_64",
       "headless": "{{user `headless`}}",
       "http_directory": "http",
-      "iso_checksum": "eb443876587de79bb29355afab8915ff592217df31ea16853e150aff66bc8b8d5e1d1e21d2265bd1773593ea7b414b5062ccf06bbe0f929f498808b79fa9d4b6",
+      "iso_checksum": "616832324de6820c1930bd92291a6eec7e1f051ecd7770413754981ab1c4d49f186564b8f1fc31993334f12d0aadc9474f4471174f3634852749349b9e8bb870",
       "iso_checksum_type": "sha512",
       "iso_url": "{{user `mirror`}}/releases/amd64/autobuilds/{{user `stage3`}}/install-amd64-minimal-{{user `stage3`}}.iso",
       "output_directory": "output-gentoo-amd64",
@@ -91,7 +91,7 @@
     "memory": "1024",
     "mirror": "http://ftp.tku.edu.tw/Linux/Gentoo",
     "password": "vagrant",
-    "stage3": "20150507",
+    "stage3": "20150514",
     "username": "root"
   }
 }
